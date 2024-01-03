@@ -25,7 +25,6 @@ class MyAwesomeModel(nn.Module):
         x = F.relu(self.conv2(x))
         x = self.maxpool(x)
         out_size = x.view(1, -1).size(1)
-        print(f"Out size: {out_size}")
         return out_size
 
     def forward(self, x):
@@ -33,10 +32,8 @@ class MyAwesomeModel(nn.Module):
         x = self.maxpool(x)
         x = F.relu(self.conv2(x))
         x = self.maxpool(x)
-        print(x.shape)
         # Flatten input to fit maxpool output
         x = x.view(-1, self.pool_output_size)
-        print(x.shape)
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         x = self.output(x)
