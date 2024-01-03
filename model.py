@@ -6,9 +6,9 @@ class MyAwesomeModel(nn.Module):
     """My awesome model."""
     def __init__(self):
         super().__init__()
-        self.conv1 = nn.Conv2d(1, 3, 5)
+        self.conv1 = nn.Conv2d(1, 32, 3)
         self.maxpool = nn.MaxPool2d(2)
-        self.conv2 = nn.Conv2d(3, 9, 3)
+        self.conv2 = nn.Conv2d(3, 64, 3)
 
         # Dynamic computation of the size after max-pooling
         self.pool_output_size = self.calculate_pool_output_size()
