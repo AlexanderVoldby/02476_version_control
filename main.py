@@ -32,7 +32,6 @@ def train(lr, e):
             optim.zero_grad()
             logits = model(images)
             loss = criterion(logits, labels)
-            running_loss += loss.item()
             loss.backward()
             optim.step()
     
