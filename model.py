@@ -35,7 +35,7 @@ class MyAwesomeModel(nn.Module):
         x = self.maxpool(x)
 
         # Flatten input to fit maxpool output
-        x = x.view(-1, 9 * self.pool_output_size)
+        x = x.view(-1, self.pool_output_size)
         print(x.shape)
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
