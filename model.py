@@ -13,7 +13,7 @@ class MyAwesomeModel(nn.Module):
         # Dynamic computation of the size after max-pooling
         self.pool_output_size = self.calculate_pool_output_size()
 
-        self.fc1 = nn.Linear(9 * self.pool_output_size, 128)
+        self.fc1 = nn.Linear(self.pool_output_size, 128)
         self.fc2 = nn.Linear(128, 64)
         self.output = nn.Linear(64, 10)
 
@@ -33,7 +33,7 @@ class MyAwesomeModel(nn.Module):
         x = self.maxpool(x)
         x = F.relu(self.conv2(x))
         x = self.maxpool(x)
-
+        print(x.shape)
         # Flatten input to fit maxpool output
         x = x.view(-1, self.pool_output_size)
         print(x.shape)
