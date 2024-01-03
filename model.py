@@ -24,7 +24,9 @@ class MyAwesomeModel(nn.Module):
         x = self.maxpool(x)
         x = F.relu(self.conv2(x))
         x = self.maxpool(x)
-        return x.view(1, -1).size(1)
+        out_size = x.view(1, -1).size(1)
+        print(f"Out size: {out_size}")
+        return out_size
 
     def forward(self, x):
         x = F.relu(self.conv1(x))
@@ -32,9 +34,9 @@ class MyAwesomeModel(nn.Module):
         x = F.relu(self.conv2(x))
         x = self.maxpool(x)
 
-        # Flatten input to 64 x (9 * pool_output_size)
+        # Flatten input to fit maxpool output
         x = x.view(-1, 9 * self.pool_output_size)
-        
+        print(x.shape)
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         x = self.output(x)
@@ -42,14 +44,14 @@ class MyAwesomeModel(nn.Module):
         return x
 
 
-    # Test output dimensions
-    if __name__ == "__main__":
-        from data import mnist
-        trainset, testset = mnist()
-        model = MyAwesomeModel()
-        # Make one forward pass
-        images, labels = next(iter(trainset))
-        out = model(images)
-        print(out.shape)
-    
+# Test output dimensions
+if __name__ == "__main__":
+    from data import mnist
+    trainset, testset = mnist()
+    model = MyAwesomeModel()
+    # Make one forward pass
+    images, labels = next(iter(trainset))
+    out = model(images)
+    print(out.shape)
+
 
